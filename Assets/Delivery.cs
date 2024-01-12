@@ -4,9 +4,11 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
 public class Delivery : MonoBehaviour
 {
     bool packagePickedUp;
+    public Driver driver;
 
     [SerializeField] float destroyTime = 0.5f;
     [SerializeField] Color32 packagePickedUpColour = new Color32(1,1,1,1);
@@ -17,6 +19,8 @@ public class Delivery : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        
+        
     }  
     void OnCollisionEnter2D(Collision2D other)
     {
@@ -43,6 +47,8 @@ public class Delivery : MonoBehaviour
             Debug.Log("Package delivered");
             packagePickedUp = false;
             spriteRenderer.color = packageNotPickedUpColour;
+            driver.moveSpeed = 15f;
+            Debug.Log("Speed reset");
         }
     }
 }
